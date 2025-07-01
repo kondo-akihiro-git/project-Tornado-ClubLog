@@ -1,0 +1,106 @@
+# =============================
+# ▼ 共通（ログ・キャッシュなど）
+# =============================
+
+# 各種ログファイル（Tornado や npm 実行時のエラー含む）
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS関連の不要ファイル
+.DS_Store
+Thumbs.db
+
+# Python の __pycache__ ディレクトリ（Tornado 側）
+__pycache__/
+
+# Python バイトコード
+*.py[cod]
+
+# Python 仮想環境（標準的な名前）
+venv/
+env/
+
+# .localなどのマシンごとの環境ファイル
+*.local
+
+# dotenvファイル（開発環境用で機密情報を含む可能性あり）
+.env*
+!.env.example  # 例示用は追跡対象
+
+# =============================
+# ▼ Vue (Vite) 関連
+# =============================
+
+# node_modules：依存ライブラリ
+node_modules/
+
+# Vite / Vue のビルド出力
+dist/
+dist-ssr/
+*.temp/
+
+# キャッシュディレクトリ（高速化用で不要）
+.vite/
+.cache/
+.eslintcache
+coverage/  # テストカバレッジレポート
+
+# ===============
+# ▼ Tornado 側
+# ===============
+
+# SQLiteなどのDBファイルが使われる場合の対策（使う場合のみ）
+*.sqlite
+*.sqlite3
+
+# テスト結果や一時ファイル
+*.tmp
+*.bak
+
+# mypyやpytestなどのキャッシュ（今後使う可能性あり）
+.mypy_cache/
+.pytest_cache/
+
+# =============================
+# ▼ IDE / エディタ固有の設定
+# =============================
+
+# VSCode の設定（推奨拡張だけは管理）
+.vscode/*
+!.vscode/extensions.json
+
+# JetBrains系エディタ（例：PyCharm, WebStorm）
+.idea/
+
+# Visual Studio 系
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Swapファイルなど（viやemacsの一時ファイル）
+*.sw?
+
+# =============================
+# ▼ Docker関連（使う予定なら）
+# =============================
+
+# Docker関係のビルドキャッシュ（必要に応じて）
+docker-compose.override.yml
+*.pid
+
+# =============================
+# ▼ その他将来使われがちなもの
+# =============================
+
+# ローカルのサーバー起動用スクリプトなどで生成される一時ファイル
+*.pid
+*.log.*
+
+# Macのメタ情報
+.AppleDouble
+.LSOverride
