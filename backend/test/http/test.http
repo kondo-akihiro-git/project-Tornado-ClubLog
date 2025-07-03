@@ -1,0 +1,8 @@
+### 参加者一覧取得APIテスト
+GET http://localhost:8000/participants
+Accept: application/json
+
+### 参加者一覧取得APIテスト
+GET http://localhost:8000/users
+Accept: application/json
+

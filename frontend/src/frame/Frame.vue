@@ -1,16 +1,14 @@
 <!-- src/frame/Frame.vue -->
 <template>
-    <div class="frame">
-        <slot></slot>
+    <div class="frame-root">
+        <div class="frame-center">
+                <Header />
+            <slot />
+        </div>
     </div>
 </template>
 
-<style scoped>
-.frame {
-    padding: 2rem;
-    font-family: sans-serif;
-    background: #f9f9f9;
-    margin: 2rem auto;
-    width: 100%;
-}
-</style>
+<script setup>
+import './css/Frame.css';
+import Header from '../components/Header.vue';
+</script>
