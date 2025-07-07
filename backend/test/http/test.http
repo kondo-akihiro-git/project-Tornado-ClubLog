@@ -2,7 +2,23 @@
 GET http://localhost:8000/participants
 Accept: application/json
 
-### 参加者一覧取得APIテスト
+### 全ユーザー取得APIテスト
 GET http://localhost:8000/users
 Accept: application/json
 
+### 単体のユーザー取得APIテスト
+GET http://localhost:8000/user/1/info
+Accept: application/json
+
+### 参加記録取得APIテスト
+GET http://localhost:8000/user/1/records
+Accept: application/json
+
+### イベントID 1 にリンクを作成
+POST http://localhost:8000/link
+Content-Type: application/json
+
+{
+  "url": "https://example.com/test_event_link",
+  "event_id": 1
+}

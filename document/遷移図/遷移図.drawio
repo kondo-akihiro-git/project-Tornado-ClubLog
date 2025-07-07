@@ -1,10 +1,10 @@
 <mxfile host="65bd71144e">
     <diagram id="lLh3odTuo71RBv_aVz9H" name="ページ1">
-        <mxGraphModel dx="241" dy="427" grid="0" gridSize="9" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="291" background="none" math="0" shadow="1">
+        <mxGraphModel dx="532" dy="427" grid="0" gridSize="9" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="291" background="none" math="0" shadow="1">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="6" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;部長ユーザー操作" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
+                <mxCell id="6" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;span style=&quot;background-color: light-dark(rgb(176, 212, 183), rgb(237, 237, 237));&quot;&gt;同好会管理ロール&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
                     <mxGeometry x="1422" y="92" width="589" height="400" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" value="" style="edgeStyle=none;html=1;" parent="1" source="2" target="3" edge="1">
@@ -25,43 +25,40 @@
                 <mxCell id="33" style="edgeStyle=none;html=1;" parent="1" source="3" target="32" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="51">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="3" value="&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;ホーム画面&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="3" value="&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;ホーム画面&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;(Home.vue)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="1653.5" y="269" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;参加者管理画面&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-                    <mxGeometry x="1579" y="392" width="126" height="60" as="geometry"/>
+                <mxCell id="4" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;参加者管理画面&lt;br&gt;(Participants.vue&lt;/span&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="1653.5" y="392" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="リンク作成画面" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-                    <mxGeometry x="1442" y="392" width="126" height="61" as="geometry"/>
+                <mxCell id="5" value="リンク作成画面&lt;br&gt;(LinkCreater.vue)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="1509" y="392" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;一般ユーザー操作" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
-                    <mxGeometry x="2042" y="95" width="440" height="400" as="geometry"/>
+                <mxCell id="23" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;span style=&quot;background-color: light-dark(rgb(248, 231, 171), rgb(237, 237, 237));&quot;&gt;参加者ロール&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
+                    <mxGeometry x="2042" y="92" width="531" height="400" as="geometry"/>
                 </mxCell>
                 <mxCell id="24" value="" style="edgeStyle=none;html=1;" parent="1" source="25" target="29" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="25" value="ログイン画面" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="2207" y="149" width="126" height="60" as="geometry"/>
+                    <mxGeometry x="2244.5" y="149" width="126" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" style="edgeStyle=none;html=1;" parent="1" source="29" target="30" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="49" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="29" target="48">
+                <mxCell id="49" value="" style="edgeStyle=none;html=1;" parent="1" source="29" target="48" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;ホーム画面&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="2207" y="269" width="126" height="60" as="geometry"/>
+                <mxCell id="29" value="&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;ホーム画面&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;(Home.vue)&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="2244.5" y="269" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;ユーザー設定画面&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="2286" y="389" width="126" height="60" as="geometry"/>
+                <mxCell id="30" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;ユーザー設定画面&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;(Setting.vue)&lt;/span&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="2332" y="389" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="ユーザー設定画面" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="1853" y="392" width="126" height="60" as="geometry"/>
+                <mxCell id="32" value="ユーザー設定画面&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;(Setting.vue)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1796" y="392" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="34" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;管理者ユーザー操作" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
+                <mxCell id="34" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;span style=&quot;background-color: light-dark(rgb(169, 203, 234), rgb(237, 237, 237));&quot;&gt;管理者ロール&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
                     <mxGeometry x="954" y="92" width="440" height="400" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="" style="edgeStyle=none;html=1;" parent="1" source="36" target="38" edge="1">
@@ -73,17 +70,17 @@
                 <mxCell id="37" style="edgeStyle=none;html=1;" parent="1" source="38" target="39" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="55" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="38" target="54">
+                <mxCell id="55" value="" style="edgeStyle=none;html=1;" parent="1" source="38" target="54" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" value="&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;ホーム画面&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="38" value="&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;ホーム画面&lt;br&gt;(Home.vue)&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="1111" y="272" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="39" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;ユーザー設定画面&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="39" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;ユーザー設定画面&lt;br&gt;(Setting.vue)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="1185" y="392" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="42" value="参加登録画面" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="2059" y="269" width="126" height="60" as="geometry"/>
+                <mxCell id="42" value="参加登録画面&lt;div&gt;※リンクから遷移&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(Register.vue)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="2105" y="269" width="126" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="46" style="edgeStyle=none;html=1;shape=link;dashed=1;" parent="1" source="5" target="42" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -91,13 +88,10 @@
                 <mxCell id="47" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="42" target="29" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="48" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;参加記録確認画面&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="2127" y="389" width="126" height="60" as="geometry"/>
+                <mxCell id="48" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;参加記録確認画面&lt;br&gt;(Records.vue)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="2157" y="389" width="126" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="51" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;参加記録確認画面&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="1715" y="392" width="126" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="54" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;参加記録確認画面&lt;br&gt;(全同好会)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                <mxCell id="54" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;参加記録確認画面&lt;br&gt;(Users.vue)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
                     <mxGeometry x="1029" y="392" width="126" height="60" as="geometry"/>
                 </mxCell>
             </root>

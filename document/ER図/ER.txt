@@ -1,0 +1,5 @@
+users
+ └──< owns >── clubs
+                └──< hosts >── events
+                                 ├──< has one >── links
+                                 └──< joined by >── participants ──< belongs to >── users

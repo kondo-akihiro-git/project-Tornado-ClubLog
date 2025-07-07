@@ -1,43 +1,38 @@
-# api/handlers/users_handler.py
+# backend/api/handlers/records_handler.py
 import tornado.web
 from backend.db.connection.connection import get_connection
 
-class UsersHandler(tornado.web.RequestHandler):
+class RecordsHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
 
-    async def get(self):
+    async def get(self, user_id):
+        
         try:
             conn = get_connection()
             cursor = conn.cursor()
 
-            # 修正済みのSQL：events 経由で clubs に JOIN
             cursor.execute("""
                 SELECT
-                    u.id,
-                    u.username,
                     c.name AS club_name,
                     p.joined_at
-                FROM
-                    users u
-                JOIN participants p ON u.id = p.user_id
+                FROM participants p
                 JOIN events e ON p.event_id = e.id
                 JOIN clubs c ON e.club_id = c.id
-                ORDER BY u.id, p.joined_at;
-            """)
+                WHERE p.user_id = %s
+                ORDER BY p.joined_at DESC;
+            """, (user_id,))
 
             rows = cursor.fetchall()
             result = [
                 {
-                    "user_id": row[0],
-                    "username": row[1],
-                    "club_name": row[2],
-                    "joined_at": row[3].isoformat()
+                    "club_name": row[0],
+                    "joined_at": row[1].isoformat()
                 }
                 for row in rows
             ]
 
-            self.write({"user_participation": result})
+            self.write({"records": result})
 
         except Exception as e:
             self.set_status(500)
