@@ -4,13 +4,13 @@ from backend.api.handlers.participants_handler import ParticipantsHandler
 from tornado.testing import AsyncHTTPTestCase, gen_test
 import logging
 
+from backend.api.main import make_app
+
 logger = logging.getLogger(__name__)
 
 class TestParticipantsHandler(AsyncHTTPTestCase):
     def get_app(self):
-        return tornado.web.Application([
-            (r"/participants", ParticipantsHandler)
-        ])
+                return make_app() 
 
     @gen_test
     async def test_get_participants(self):
