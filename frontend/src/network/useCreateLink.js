@@ -1,12 +1,12 @@
 // src/network/useCreateLink.js
-export async function useCreateLink(url, event_id) {
+export async function useCreateLink(url_token, event_id) {
   try {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/link`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ url, event_id })
+      body: JSON.stringify({ url_token, event_id })
     });
 
     if (!response.ok) {

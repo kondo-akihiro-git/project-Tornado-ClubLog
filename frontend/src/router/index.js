@@ -7,6 +7,7 @@ import LinkCreater from '../pages/LinkCreater.vue'
 import Login from '../pages/Login.vue'
 import Users from '../pages/Users.vue'
 import Records from '../pages/Records.vue'
+import Register from '../pages/Register.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -16,6 +17,7 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/users', component: Users },
   { path: '/records', component: Records },
+  { path: '/register/:token', component: Register } 
 ]
 
 export default createRouter({

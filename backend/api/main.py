@@ -1,6 +1,7 @@
 # api/main.py
 import tornado.ioloop
 import tornado.web
+from backend.api.handlers.events_handler import EventsHandler
 from backend.api.handlers.link_handler import LinkHandler
 from backend.api.handlers.participants_handler import ParticipantsHandler
 from backend.api.handlers.records_handler import RecordsHandler
@@ -15,6 +16,7 @@ def make_app():
         (r"/user/([0-9]+)/info", UserHandler),
         (r"/user/([0-9]+)/records", RecordsHandler),  
         (r"/link", LinkHandler),
+        (r"/events", EventsHandler),
     ])
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import tornado.web
 from tornado.testing import AsyncHTTPTestCase, gen_test
 import json
-import psycopg2
+import uuid
 from backend.api.main import make_app
 from backend.db.connection.connection import get_connection
 
@@ -20,14 +20,13 @@ class TestLinkHandler(AsyncHTTPTestCase):
     @gen_test
     async def test_create_link(self):
         event_id = 1
-        url = "https://example.com/test_event_link"
+        url_token = str(uuid.uuid4()) 
 
-        # 🔁 前処理：リンクを削除（同じevent_idが残っていないように）
         self.delete_link(event_id)
 
         # 📤 登録
         payload = {
-            "url": url,
+            "url_token": url_token, 
             "event_id": event_id
         }
         response = await self.http_client.fetch(
@@ -39,8 +38,7 @@ class TestLinkHandler(AsyncHTTPTestCase):
 
         assert response.code == 201
         body = json.loads(response.body.decode("utf-8"))
-        assert body["url"] == url
+        assert body["url_token"] == url_token 
         assert body["event_id"] == event_id
 
-        # 🔁 後処理：登録したリンクを削除（テスト汚染防止）
         self.delete_link(event_id)

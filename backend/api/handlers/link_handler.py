@@ -18,12 +18,12 @@ class LinkHandler(tornado.web.RequestHandler):
     async def post(self):
         try:
             data = json.loads(self.request.body.decode("utf-8"))
-            url = data.get("url")
+            url_token = data.get("url_token")  # ← url からトークン部分だけを送っている前提
             event_id = data.get("event_id")
 
-            if not url or not event_id:
+            if not url_token or not event_id:
                 self.set_status(400)
-                self.write({"error": "urlとevent_idは必須です"})
+                self.write({"error": "url_tokenとevent_idは必須です"})
                 return
 
             conn = get_connection()
@@ -36,17 +36,18 @@ class LinkHandler(tornado.web.RequestHandler):
                 return
 
             cursor.execute("""
-                INSERT INTO links (url, event_id)
+                INSERT INTO links (url_token, event_id)
                 VALUES (%s, %s)
-                RETURNING id, url, event_id, created_at;
-            """, (url, event_id))
+                RETURNING id, url_token, event_id, created_at;
+            """, (url_token, event_id))
+
             result = cursor.fetchone()
             conn.commit()
 
             self.set_status(201)
             self.write({
                 "id": result[0],
-                "url": result[1],
+                "url_token": result[1],
                 "event_id": result[2],
                 "created_at": result[3].isoformat()
             })
@@ -54,7 +55,6 @@ class LinkHandler(tornado.web.RequestHandler):
         except Exception as e:
             self.set_status(500)
             self.write({"error": str(e)})
-
         finally:
             if cursor:
                 cursor.close()

@@ -1,25 +1,38 @@
-<!-- src/pages/LinkCreater.vue -->
 <script setup>
 import { ref } from 'vue'
+import { v4 as uuidv4 } from 'uuid'
+import { useCreateEvent } from '../network/useCreateEvent'
 import { useCreateLink } from '../network/useCreateLink'
 
-const url = ref('')
-const eventId = ref('')
+const eventTitle = ref('')
+const generatedUrl = ref('')
 const message = ref('')
 
 async function createLink() {
-  if (!url.value || !eventId.value) {
-    message.value = 'URLとイベントIDは必須です'
+  if (!eventTitle.value) {
+    message.value = 'イベント名は必須です'
     return
   }
-  
-  const res = await useCreateLink(url.value, Number(eventId.value))
-  if (res.success) {
-    message.value = `リンクを作成しました！ID: ${res.data.id}`
-    url.value = ''
-    eventId.value = ''
+
+  // 1. イベントを作成（club_id は仮に 1 で固定）
+  const club_id = 1
+  const eventRes = await useCreateEvent(eventTitle.value, club_id)
+  if (!eventRes.success) {
+    message.value = `イベント作成エラー: ${eventRes.error}`
+    return
+  }
+
+  // 2. リンクを作成
+  const eventId = eventRes.data.id
+  const token = uuidv4()
+  const linkRes = await useCreateLink(token, eventId)
+  const fullUrl = `${window.location.origin}/register/${token}`
+
+  if (linkRes.success) {
+    generatedUrl.value = fullUrl
+    message.value = 'リンクを作成しました！以下から登録できます:'
   } else {
-    message.value = `エラー: ${res.error}`
+    message.value = `リンク作成エラー: ${linkRes.error}`
   }
 }
 </script>
@@ -29,17 +42,19 @@ async function createLink() {
     <h1>参加記録用のリンク作成</h1>
 
     <div>
-      <label for="url">URL:</label>
-      <input id="url" v-model="url" type="text" placeholder="https://example.com/event" />
+      <label for="eventTitle">イベント名:</label>
+      <input id="eventTitle" v-model="eventTitle" type="text" placeholder="イベント名を入力" />
     </div>
 
-    <div>
-      <label for="eventId">イベントID:</label>
-      <input id="eventId" v-model="eventId" type="number" min="1" placeholder="イベントIDを入力" />
-    </div>
+    <!-- イベント開催日を追加 -->
 
     <button @click="createLink">リンク作成</button>
 
-    <p v-if="message" style="margin-top: 1em; color: #333;">{{ message }}</p>
+    <div v-if="generatedUrl" style="margin-top: 1em">
+      <p>{{ message }}</p>
+      <a :href="generatedUrl" target="_blank">{{ generatedUrl }}</a>
+    </div>
+
+    <p v-else-if="message" style="margin-top: 1em; color: #333;">{{ message }}</p>
   </div>
 </template>

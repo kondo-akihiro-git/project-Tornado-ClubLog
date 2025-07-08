@@ -14,11 +14,22 @@ Accept: application/json
 GET http://localhost:8000/user/1/records
 Accept: application/json
 
-### イベントID 1 にリンクを作成
+
+### イベントの作成作成
+POST http://localhost:8000/events
+Content-Type: application/json
+
+{
+  "title": "test_event_title",
+  "club_id": 1,
+  "scheduled_at": "2025-08-01T18:00:00"
+}
+
+### イベントID 1 にリンクを作成 
 POST http://localhost:8000/link
 Content-Type: application/json
 
 {
-  "url": "https://example.com/test_event_link",
+  "url_token": "test_token",
   "event_id": 1
 }
