@@ -1,4 +1,3 @@
-# api/handlers/link_handler.py
 import tornado.web
 import json
 from backend.db.connection.connection import get_connection
@@ -11,14 +10,13 @@ class LinkHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Methods", "POST, OPTIONS")
 
     async def options(self):
-        # CORSプリフライト用の空レスポンス
         self.set_status(204)
         self.finish()
 
     async def post(self):
         try:
             data = json.loads(self.request.body.decode("utf-8"))
-            url_token = data.get("url_token")  # ← url からトークン部分だけを送っている前提
+            url_token = data.get("url_token")
             event_id = data.get("event_id")
 
             if not url_token or not event_id:
@@ -29,22 +27,32 @@ class LinkHandler(tornado.web.RequestHandler):
             conn = get_connection()
             cursor = conn.cursor()
 
+            # 既存リンクをチェック
             cursor.execute("SELECT id FROM links WHERE event_id = %s;", (event_id,))
-            if cursor.fetchone():
-                self.set_status(409)
-                self.write({"error": "このイベントには既にリンクが存在します"})
-                return
+            existing = cursor.fetchone()
 
-            cursor.execute("""
-                INSERT INTO links (url_token, event_id)
-                VALUES (%s, %s)
-                RETURNING id, url_token, event_id, created_at;
-            """, (url_token, event_id))
+            if existing:
+                # 更新
+                cursor.execute("""
+                    UPDATE links
+                    SET url_token = %s, created_at = CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Tokyo'
+                    WHERE event_id = %s
+                    RETURNING id, url_token, event_id, created_at;
+                """, (url_token, event_id))
+                result = cursor.fetchone()
+                self.set_status(200)
+            else:
+                # 新規登録
+                cursor.execute("""
+                    INSERT INTO links (url_token, event_id)
+                    VALUES (%s, %s)
+                    RETURNING id, url_token, event_id, created_at;
+                """, (url_token, event_id))
+                result = cursor.fetchone()
+                self.set_status(201)
 
-            result = cursor.fetchone()
             conn.commit()
 
-            self.set_status(201)
             self.write({
                 "id": result[0],
                 "url_token": result[1],

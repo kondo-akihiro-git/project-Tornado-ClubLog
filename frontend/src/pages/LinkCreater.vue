@@ -5,24 +5,23 @@ import { useCreateEvent } from '../network/useCreateEvent'
 import { useCreateLink } from '../network/useCreateLink'
 
 const eventTitle = ref('')
+const scheduledAt = ref('')
 const generatedUrl = ref('')
 const message = ref('')
 
 async function createLink() {
-  if (!eventTitle.value) {
-    message.value = 'イベント名は必須です'
+  if (!eventTitle.value || !scheduledAt.value) {
+    message.value = 'イベント名と開催日は必須です'
     return
   }
 
-  // 1. イベントを作成（club_id は仮に 1 で固定）
   const club_id = 1
-  const eventRes = await useCreateEvent(eventTitle.value, club_id)
+  const eventRes = await useCreateEvent(eventTitle.value, club_id, scheduledAt.value)
   if (!eventRes.success) {
     message.value = `イベント作成エラー: ${eventRes.error}`
     return
   }
 
-  // 2. リンクを作成
   const eventId = eventRes.data.id
   const token = uuidv4()
   const linkRes = await useCreateLink(token, eventId)
@@ -46,7 +45,10 @@ async function createLink() {
       <input id="eventTitle" v-model="eventTitle" type="text" placeholder="イベント名を入力" />
     </div>
 
-    <!-- イベント開催日を追加 -->
+    <div>
+      <label for="scheduledAt">開催日:</label>
+      <input id="scheduledAt" v-model="scheduledAt" type="datetime-local" />
+    </div>
 
     <button @click="createLink">リンク作成</button>
 
