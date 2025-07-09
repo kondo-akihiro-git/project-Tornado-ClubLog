@@ -33,3 +33,28 @@ Content-Type: application/json
   "url_token": "test_token",
   "event_id": 1
 }
+
+### トークンでイベント取得
+GET http://localhost:8000/events?token=test
+Accept: application/json
+
+
+### 新規ユーザーでイベント参加登録
+POST http://localhost:8000/register
+Content-Type: application/json
+
+{
+  "mail_address": "sampleuser@example.com",
+  "password": "securepass",
+  "event_id": 1
+}
+
+### 同じユーザーで再度登録（重複登録防止）
+POST http://localhost:8000/register
+Content-Type: application/json
+
+{
+  "mail_address": "sampleuser@example.com",
+  "password": "securepass",
+  "event_id": 1
+}
