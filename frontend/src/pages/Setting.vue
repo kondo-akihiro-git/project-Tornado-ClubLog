@@ -17,11 +17,6 @@ onMounted(async () => {
 
     <v-form v-if="user">
       <v-text-field
-        label="ユーザーID"
-        v-model="user.id"
-        readonly
-      />
-      <v-text-field
         label="ユーザー名"
         v-model="user.username"
         readonly
@@ -29,11 +24,6 @@ onMounted(async () => {
       <v-text-field
         label="メールアドレス"
         v-model="user.mail_address"
-        readonly
-      />
-      <v-text-field
-        label="権限"
-        v-model="user.user_role"
         readonly
       />
       <v-text-field

@@ -12,7 +12,7 @@ class UserHandler(tornado.web.RequestHandler):
             cursor = conn.cursor()
 
             cursor.execute("""
-                SELECT id, username, mail_address, user_role, updated_at
+                SELECT id, username, mail_address, updated_at
                 FROM users
                 WHERE id = %s;
             """, (user_id,))
@@ -24,8 +24,7 @@ class UserHandler(tornado.web.RequestHandler):
                     "id": row[0],
                     "username": row[1],
                     "mail_address": row[2],
-                    "user_role": row[3],
-                    "updated_at": row[4].isoformat()
+                    "updated_at": row[3].isoformat() if row[3] else None
                 }
                 self.write(user)
             else:
