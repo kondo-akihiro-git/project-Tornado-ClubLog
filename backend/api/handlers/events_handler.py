@@ -62,10 +62,11 @@ class EventsHandler(tornado.web.RequestHandler):
                 self.set_status(200)
             else:
                 cursor.execute("""
-                    INSERT INTO events (title, club_id, scheduled_at)
-                    VALUES (%s, %s, %s)
+                    INSERT INTO events (title, club_id, scheduled_at, created_at)
+                    VALUES (%s, %s, %s, NOW())
                     RETURNING id, title, club_id, scheduled_at, created_at;
                 """, (title, club_id, scheduled_at))
+
                 row = cursor.fetchone()
                 self.set_status(201)
 

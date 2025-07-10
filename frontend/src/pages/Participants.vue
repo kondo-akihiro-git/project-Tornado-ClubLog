@@ -8,22 +8,62 @@ onMounted(async () => {
   const res = await useGetParticipants()
   clubs.value = res.clubs ?? []
 })
+
+const approve = (user) => {
+  console.log('承認:', user)
+}
+
+const reject = (user) => {
+  console.log('却下:', user)
+}
+
 </script>
 
 <template>
   <div>
     <h1 class="text-h5 mb-4">同好会別イベント参加者一覧</h1>
-    <div v-for="club in clubs" :key="club.club_name" class="mb-6">
-      <h2 class="text-h6">{{ club.club_name }}</h2>
-      <div v-for="event in club.events" :key="event.event_id" class="ml-4">
-        <p class="font-medium">イベント: {{ event.title }}</p>
-        <ul>
-          <li v-for="user in event.participants" :key="user.mail_address">
-            {{ user.username }}（{{ user.mail_address }}）
-          </li>
-        </ul>
-      </div>
-    </div>
+
+    <v-expansion-panels multiple>
+      <v-expansion-panel v-for="club in clubs" :key="club.club_name">
+        <v-expansion-panel-title>
+          {{ club.club_name }}
+        </v-expansion-panel-title>
+
+        <v-expansion-panel-text>
+          <v-expansion-panels multiple>
+            <v-expansion-panel v-for="event in club.events" :key="event.event_id">
+              <v-expansion-panel-title>
+                イベント: {{ event.title }}
+              </v-expansion-panel-title>
+
+              <v-expansion-panel-text>
+<ul>
+  <li
+    v-for="user in event.participants"
+    :key="user.mail_address"
+    class="mb-2"
+  >
+    <v-row align="center" no-gutters>
+      <v-col cols="8">
+        {{ user.username }}（{{ user.mail_address }}）
+      </v-col>
+      <v-col cols="2">
+        <v-btn color="primary" size="small" @click="approve(user)">承認</v-btn>
+      </v-col>
+      <v-col cols="2">
+        <v-btn color="error" size="small" @click="reject(user)">却下</v-btn>
+      </v-col>
+    </v-row>
+  </li>
+</ul>
+
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
+
 
