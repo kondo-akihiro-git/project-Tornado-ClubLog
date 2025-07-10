@@ -16,6 +16,7 @@ def make_app():
         (r"/participants", ParticipantsHandler), 
         (r"/users", UsersHandler),
         (r"/user/([0-9]+)/info", UserHandler),
+        (r"/user/([0-9]+)", UserHandler),
         (r"/user/([0-9]+)/records", RecordsHandler),  
         (r"/link", LinkHandler),
         (r"/events", EventsHandler),
