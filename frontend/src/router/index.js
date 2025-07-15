@@ -8,6 +8,7 @@ import Login from '../pages/Login.vue'
 import Users from '../pages/Users.vue'
 import Records from '../pages/Records.vue'
 import Register from '../pages/Register.vue'
+import { useAuth } from '../network/useAuth'
 
 const routes = [
   { path: '/', component: Home },
@@ -17,10 +18,35 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/users', component: Users },
   { path: '/records', component: Records },
-  { path: '/register/:token', component: Register } 
+  { path: '/register/:token', component: Register },
+  { path: '/login', component: Login },
 ]
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
+router.beforeEach(async (to, from, next) => {
+  const publicPages = ['/login', '/register/:token']
+  const isPublic = publicPages.some(p => to.path.startsWith(p))
+  const user = JSON.parse(localStorage.getItem('user'))
+
+  if (!user && !isPublic) {
+    return next('/login')
+  }
+
+  if (!isPublic && user) {
+    try {
+      await useAuth(user.user_id)
+      return next()
+    } catch {
+      localStorage.removeItem('user')
+      return next('/login')
+    }
+  }
+
+  return next()
+})
+
+export default router

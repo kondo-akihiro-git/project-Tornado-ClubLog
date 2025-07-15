@@ -2,8 +2,10 @@
 import tornado.ioloop
 import tornado.web
 from backend.api.handlers.approval_handler import ApprovalHandler
+from backend.api.handlers.auth_handler import AuthHandler
 from backend.api.handlers.events_handler import EventsHandler
 from backend.api.handlers.link_handler import LinkHandler
+from backend.api.handlers.login_handler import LoginHandler
 from backend.api.handlers.participants_handler import ParticipantsHandler
 from backend.api.handlers.records_handler import RecordsHandler
 from backend.api.handlers.register_handler import RegisterHandler
@@ -24,7 +26,8 @@ def make_app():
         (r"/register", RegisterHandler),
         (r"/verify", VerifyHandler),
         (r"/approval", ApprovalHandler),
-
+        (r"/login", LoginHandler),
+        (r"/auth", AuthHandler),
     ])
 
 if __name__ == "__main__":

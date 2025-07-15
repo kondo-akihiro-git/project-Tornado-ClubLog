@@ -1,11 +1,19 @@
 // src/network/useLogin.js
-export async function useLogin() {
+export async function useLogin({ mail_address, password }) {
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/`)
-    const data = await response.text()
-    return data
-  } catch (error) {
-    console.error('API fetch error:', error)
-    return 'Error fetching from API'
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mail_address, password })
+    })
+
+    if (!res.ok) {
+      const errorData = await res.json()
+      throw new Error(errorData.error || 'ログインに失敗しました')
+    }
+
+    return await res.json()
+  } catch (err) {
+    throw new Error(err.message)
   }
 }
