@@ -1,6 +1,7 @@
 # api/main.py
 import tornado.ioloop
 import tornado.web
+from backend.api.handlers.approval_handler import ApprovalHandler
 from backend.api.handlers.events_handler import EventsHandler
 from backend.api.handlers.link_handler import LinkHandler
 from backend.api.handlers.participants_handler import ParticipantsHandler
@@ -22,10 +23,12 @@ def make_app():
         (r"/events", EventsHandler),
         (r"/register", RegisterHandler),
         (r"/verify", VerifyHandler),
+        (r"/approval", ApprovalHandler),
+
     ])
 
 if __name__ == "__main__":
     app = make_app()
     app.listen(8000)
-    print("Server is running")
+    print("------------ Tornado Server Running ------------")
     tornado.ioloop.IOLoop.current().start()

@@ -19,6 +19,7 @@ class ParticipantsHandler(tornado.web.RequestHandler):
                     c.name AS club_name,
                     e.id AS event_id,
                     e.title AS event_title,
+                    u.id AS user_id, 
                     u.username,
                     u.mail_address
                 FROM events e
@@ -37,8 +38,9 @@ class ParticipantsHandler(tornado.web.RequestHandler):
                 club_name = row[1]
                 event_id = row[2]
                 event_title = row[3]
-                username = row[4]
-                mail_address = row[5]
+                user_id = row[4]
+                username = row[5]
+                mail_address = row[6]
 
                 club = clubs_dict[club_id]
                 club["club_name"] = club_name
@@ -50,6 +52,7 @@ class ParticipantsHandler(tornado.web.RequestHandler):
 
                 if username and mail_address:  # NULL参加者を除く
                     event["participants"].append({
+                        "user_id": user_id,   
                         "username": username,
                         "mail_address": mail_address
                     })
