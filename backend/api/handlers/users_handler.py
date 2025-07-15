@@ -11,7 +11,7 @@ class UsersHandler(tornado.web.RequestHandler):
             conn = get_connection()
             cursor = conn.cursor()
 
-            # 修正済みのSQL：events 経由で clubs に JOIN
+            # ✅ 承認されたユーザーだけを抽出するよう修正
             cursor.execute("""
                 SELECT
                     u.id,
@@ -23,6 +23,8 @@ class UsersHandler(tornado.web.RequestHandler):
                 JOIN participants p ON u.id = p.user_id
                 JOIN events e ON p.event_id = e.id
                 JOIN clubs c ON e.club_id = c.id
+                WHERE
+                    p.approved_status = 'approved'
                 ORDER BY u.id, p.joined_at;
             """)
 

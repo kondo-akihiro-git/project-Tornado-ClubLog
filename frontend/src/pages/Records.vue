@@ -14,7 +14,8 @@ const recordsList = computed(() => rawRecords.value.records ?? [])
 // 表示用ヘッダー
 const headers = [
   { text: '同好会名', value: 'club_name' },
-  { text: '参加日時', value: 'joined_at' }
+  { text: '参加日時', value: 'joined_at' },
+  { text: 'ステータス', value: 'approved_status' }
 ]
 
 // API呼び出し
@@ -23,6 +24,24 @@ onMounted(async () => {
   console.log("参加記録:", res)
   rawRecords.value = res
 })
+const statusLabel = (status) => {
+  switch (status) {
+    case 'approved': return '承認済み'
+    case 'pending': return '未承認'
+    case 'rejected': return '却下済み'
+    default: return '不明'
+  }
+}
+
+const statusColor = (status) => {
+  switch (status) {
+    case 'approved': return 'green'
+    case 'pending': return 'grey'
+    case 'rejected': return 'red'
+    default: return 'black'
+  }
+}
+
 </script>
 
 <template>
@@ -33,6 +52,17 @@ onMounted(async () => {
       <template #item.joined_at="{ item }">
         {{ new Date(item.joined_at).toLocaleString() }}
       </template>
+
+      <template #item.approved_status="{ item }">
+        <v-chip
+          :color="statusColor(item.approved_status)"
+          text-color="white"
+          small
+        >
+          {{ statusLabel(item.approved_status) }}
+        </v-chip>
+      </template>
     </v-data-table>
   </div>
 </template>
+

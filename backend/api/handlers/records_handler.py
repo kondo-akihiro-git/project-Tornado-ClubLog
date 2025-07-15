@@ -15,7 +15,8 @@ class RecordsHandler(tornado.web.RequestHandler):
             cursor.execute("""
                 SELECT
                     c.name AS club_name,
-                    p.joined_at
+                    p.joined_at,
+                    p.approved_status
                 FROM participants p
                 JOIN events e ON p.event_id = e.id
                 JOIN clubs c ON e.club_id = c.id
@@ -23,11 +24,13 @@ class RecordsHandler(tornado.web.RequestHandler):
                 ORDER BY p.joined_at DESC;
             """, (user_id,))
 
+
             rows = cursor.fetchall()
             result = [
                 {
                     "club_name": row[0],
-                    "joined_at": row[1].isoformat()
+                    "joined_at": row[1].isoformat(),
+                    "approved_status": row[2]
                 }
                 for row in rows
             ]
