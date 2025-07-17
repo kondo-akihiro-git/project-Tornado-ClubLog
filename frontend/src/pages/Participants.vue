@@ -10,7 +10,11 @@ const clubs = ref([])
 const statusMap = ref({})  // { [event_id_user_id]: 'approved' | 'rejected' | 'pending' }
 
 onMounted(async () => {
-  const res = await useGetParticipants()
+  const user = JSON.parse(localStorage.getItem('user'))
+  const userId = user?.user_id
+  if (!userId) return
+
+  const res = await useGetParticipants(userId)  // ← POST対応に変更
   clubs.value = res.clubs ?? []
 
   // 各ユーザー・イベントごとにステータス取得

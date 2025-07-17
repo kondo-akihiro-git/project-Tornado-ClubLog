@@ -9,7 +9,12 @@ const updatedUsername = ref('')
 const updatedPassword = ref('')
 const message = ref('')
 
-const userId = 1 // 将来的にはログインユーザーのIDを動的に
+const user_data = JSON.parse(localStorage.getItem('user'))
+const userId = user_data?.user_id
+
+if (!userId) {
+  router.push('/login')
+}
 
 onMounted(async () => {
   const res = await useGetUser(userId)

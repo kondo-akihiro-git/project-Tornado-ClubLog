@@ -1,3 +1,4 @@
+// frontend/src/network/useAuth.js
 export async function useAuth(userId) {
   try {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/auth`, {
