@@ -3,6 +3,7 @@
 import { ref, onMounted } from 'vue'
 import { useGetUser } from '../network/useGetUser'
 import { useUpdateUser } from '../network/useUpdateUser'
+import { useLogout } from '../network/useLogout'
 
 const user = ref(null)
 const updatedUsername = ref('')
@@ -58,6 +59,7 @@ async function updateUser() {
       <v-text-field label="更新日時" :model-value="new Date(user.updated_at).toLocaleString()" readonly />
 
       <v-btn type="submit" color="primary" class="mt-4">更新ボタン</v-btn>
+      <v-btn class="mt-4" color="error" @click="useLogout()">ログアウト</v-btn>
     </v-form>
 
     <div v-if="message" class="mt-2" style="color: #333;">{{ message }}</div>

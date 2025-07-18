@@ -1,20 +1,30 @@
-/* src/frame/frame.css */
+/* src/frame/Frame.css */
 
 .frame-root {
   display: flex;
   height: 100vh;
-  overflow: hidden;
-  flex-wrap: nowrap; /* 横並びを絶対に維持 */
-  min-width: 350px; /* 中央の最小幅 */
   justify-content: center;
+  min-width: 350px;
+  overflow: hidden;
 }
 
 .frame-center {
+  display: flex;
+  flex-direction: column; /* 縦に積む */
   height: 100%;
-  flex-shrink: 0;
   min-width: 350px;
   max-width: 450px;
   width: 100%;
-  background: #eef; /* あとで削除 */
-  border: 1px solid blue; /* あとで削除 */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  background-color: #fff;
 }
+
+/* 新たに追加 */
+.frame-content {
+  flex: 1;                        /* 残りのスペースを埋める */
+  overflow-y: auto;               /* 内容が多いときだけスクロール */
+  padding: 1rem;                  /* 任意：中身に余白 */
+  box-sizing: border-box;
+}
+
