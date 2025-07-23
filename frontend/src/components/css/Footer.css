@@ -20,12 +20,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: inherit;
   text-decoration: none;
 }
 
-/* アイコン下の文字 */
+.footer-icon-img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
 .footer-label {
   font-size: 0.75rem;
-  margin-top: 0.25rem;
+  color: #333;
 }
