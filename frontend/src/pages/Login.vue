@@ -6,50 +6,69 @@ import { useLogin } from '../network/useLogin'
 const mailAddress = ref('')
 const password = ref('')
 const loginError = ref('')
-const userInfo = ref(null)
+const isLoading = ref(false)
 
 const handleLogin = async () => {
   loginError.value = ''
+  isLoading.value = true
   try {
     const res = await useLogin({ mail_address: mailAddress.value, password: password.value })
-    userInfo.value = res
-    localStorage.setItem('user', JSON.stringify(res))  // ← 追加
-    window.location.href = '/'                         // ← トップページなどへ遷移
+    localStorage.setItem('user', JSON.stringify(res))
+    window.location.href = '/' // トップページへ
   } catch (err) {
     loginError.value = err.message || 'ログインに失敗しました'
+  } finally {
+    isLoading.value = false
   }
 }
-
 </script>
 
 <template>
-  <div class="ma-4">
-    <h1 class="text-h5 mb-4">ログイン</h1>
-
-    <v-text-field
-      label="メールアドレス"
-      v-model="mailAddress"
-      type="email"
-      required
-    />
-
-    <v-text-field
-      label="パスワード"
-      v-model="password"
-      type="password"
-      required
-    />
-
-    <v-btn @click="handleLogin" color="primary" class="mt-2">ログイン</v-btn>
-
-    <div v-if="loginError" class="mt-2 text-error">
-      {{ loginError }}
+  <div class="login-wrapper">
+    <div v-if="isLoading" class="loading-message">
+      ログイン中...
     </div>
 
-    <div v-if="userInfo" class="mt-4">
-      <p><strong>ユーザー名:</strong> {{ userInfo.username }}</p>
-      <p><strong>ユーザーID:</strong> {{ userInfo.user_id }}</p>
-      <p><strong>ロール:</strong> {{ userInfo.user_role }}</p>
+    <div v-else class="login-form">
+      <v-text-field
+        label="メールアドレス"
+        v-model="mailAddress"
+        type="email"
+        required
+      />
+
+      <v-text-field
+        label="パスワード"
+        v-model="password"
+        type="password"
+        required
+      />
+
+      <v-btn @click="handleLogin" color="primary" class="mt-2">ログイン</v-btn>
+
+      <div v-if="loginError" class="mt-2 text-error">
+        {{ loginError }}
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh; /* 画面全体に中央配置 */
+  text-align: center;
+}
+
+.loading-message {
+  font-size: 1rem;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+}
+</style>
