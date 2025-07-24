@@ -1,9 +1,9 @@
 -- 1. ユーザーデータ（15件）← id 明示
 INSERT INTO users (id, username, mail_address, password, user_role)
 VALUES 
-  (1, 'taro', 'taro@example.com', 'hashed_pw1', 'admin'),
-  (2, 'hanako', 'hanako@example.com', 'hashed_pw2', 'member'),
-  (3, 'jiro', 'jiro@example.com', 'hashed_pw3', 'member'),
+  (1, 'taro', 'taro@example.com', 'test', 'admin'),
+  (2, 'hanako', 'hanako@example.com', 'test', 'member'),
+  (3, 'jiro', 'jiro@example.com', 'test', 'member'),
   (4, 'yuki', 'yuki@example.com', 'hashed_pw4', 'admin'),
   (5, 'aya', 'aya@example.com', 'hashed_pw5', 'member'),
   (6, 'ken', 'ken@example.com', 'hashed_pw6', 'member'),

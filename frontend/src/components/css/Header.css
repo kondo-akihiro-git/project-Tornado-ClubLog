@@ -1,13 +1,18 @@
 /* src/components/css/Header.css */
 .header {
-  background-color: #f0f0f0;
-  padding: 0.5rem;
+  background-color: white;
+  /* #f0f0f0; */
+  padding: 0.4rem;
   text-align: center;
   border: 1px solid #ccc;
+  display: flex;
+  justify-content: center; /* 横中央 */
+  align-items: center;
 }
 
 .header-title {
   font-size: 1rem;
+  display: inline-block;
   font-weight: bold;
   color: #333;
   text-decoration: none;
@@ -15,4 +20,10 @@
 
 .header-title:hover {
   text-decoration: underline;
+}
+
+.title-icon {
+  height: 35px;       /* ヘッダーテキストと同程度のサイズ感 */
+  width: auto;        /* アスペクト比を維持 */
+  display: block;
 }
