@@ -55,14 +55,26 @@ async function updateUser() {
     <v-form v-if="user" @submit.prevent="updateUser">
       <v-text-field label="ユーザー名" v-model="updatedUsername" />
       <v-text-field label="新しいパスワード" v-model="updatedPassword" type="password" />
-      <v-text-field label="メールアドレス" v-model="user.mail_address" readonly />
-      <v-text-field label="更新日時" :model-value="new Date(user.updated_at).toLocaleString()" readonly />
+      <v-text-field label="メールアドレス" v-model="user.mail_address" readonly class="readonly-field" />
 
-      <v-btn type="submit" color="primary" class="mt-4">更新ボタン</v-btn>
-      <v-btn class="mt-4" color="error" @click="useLogout()">ログアウト</v-btn>
+      <v-text-field label="更新日時" :model-value="new Date(user.updated_at).toLocaleString()" readonly
+        class="readonly-field" />
+
+
+      <div class="d-flex justify-space-between mt-4">
+        <v-btn type="submit" color="primary">更新</v-btn>
+        <v-btn color="error" @click="useLogout()">ログアウト</v-btn>
+      </div>
     </v-form>
 
     <div v-if="message" class="mt-2" style="color: #333;">{{ message }}</div>
     <div v-else-if="!user">ユーザー情報を読み込み中...</div>
   </div>
 </template>
+
+<style>
+.readonly-field {
+  color: #777;
+  cursor: not-allowed;
+}
+</style>

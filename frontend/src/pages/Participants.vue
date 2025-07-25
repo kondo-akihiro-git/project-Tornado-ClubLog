@@ -77,11 +77,12 @@ const reject = async (user, event_id) => {
   :key="user.mail_address"
   class="mb-2"
 >
-  <v-row align="center" no-gutters>
-    <v-col cols="8">
-      {{ user.username }}（{{ user.mail_address }}）
-    </v-col>
-    <v-col cols="4" class="d-flex align-center">
+
+  <v-row no-gutters class="mb-2">
+  <!-- 名前とボタン（同じ行、縦位置も揃える） -->
+  <v-col cols="12" class="d-flex justify-space-between align-center">
+    <div>{{ user.username }}</div>
+    <div>
       <v-btn
         :color="statusMap[`${event.event_id}_${user.user_id}`] === 'approved' ? 'primary' : 'grey'"
         size="small"
@@ -98,8 +99,16 @@ const reject = async (user, event_id) => {
       >
         却下
       </v-btn>
-    </v-col>
-  </v-row>
+    </div>
+  </v-col>
+
+  <!-- メールアドレス（下段・小さく・被らない） -->
+  <v-col cols="12">
+    <small class="text-grey-darken-1">メール : {{ user.mail_address }}</small>
+  </v-col>
+</v-row>
+
+
 </li>
 
                 </ul>
