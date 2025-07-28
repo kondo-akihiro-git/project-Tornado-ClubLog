@@ -67,7 +67,7 @@ const reject = async (user, event_id) => {
           <v-expansion-panels multiple>
             <v-expansion-panel v-for="event in club.events" :key="event.event_id">
               <v-expansion-panel-title>
-                イベント: {{ event.title }}
+                {{ event.title }}
               </v-expansion-panel-title>
 
               <v-expansion-panel-text>

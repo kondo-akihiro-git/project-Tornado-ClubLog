@@ -10,42 +10,45 @@ const user = ref(JSON.parse(localStorage.getItem('user')) || {})
 
 <template>
   <!-- スクロールコンテナ（カード縦スナップ） -->
-  <div class="scroll-container">
-    <!-- カード1 -->
-    <div class="scroll-card">
-      <v-img :src="troublePicture" height="100%" contain />
-    </div>
-
-    <!-- カード2 -->
-    <div class="scroll-card">
-      <v-img :src="aboutPicture" height="100%" contain />
-    </div>
-
-    <!-- カード3 -->
-    <div class="scroll-card">
-      <v-img :src="stepsPicture" height="100%" contain />
-    </div>
+<div class="scroll-container">
+  <div class="scroll-card first-card">
+    <v-img :src="troublePicture" height="100%" contain />
   </div>
+  <div class="scroll-card">
+    <v-img :src="aboutPicture" height="100%" contain />
+  </div>
+  <div class="scroll-card last-card">
+    <v-img :src="stepsPicture" height="100%" contain />
+  </div>
+</div>
 </template>
 
 <style scoped>
 .scroll-container {
-  height: calc(100vh - 120px); /* Frame.vue の header/footer 高さを除いた表示域 */
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 12px;
-  padding: 0;
+  height: auto;
+  overflow: visible;
+  scroll-snap-type: none;
   margin: 0;
+  padding: 0;
 }
 
 .scroll-card {
-  height: 100%;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
-  box-sizing: border-box;
+  height: calc(100vh - 10vh - 50px - 24px * 2);
+  margin: 24px 0;
+  border: 1px solid black;
 }
+
+.first-card {
+  margin-top: 24px;
+}
+
+.last-card {
+  margin-bottom: 24px;
+}
+
+
 </style>

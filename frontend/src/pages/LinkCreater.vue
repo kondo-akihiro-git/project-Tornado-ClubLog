@@ -1,3 +1,4 @@
+<!-- src/pages/LinkCreater.vue -->
 <script setup>
 import { ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
@@ -38,25 +39,31 @@ async function createLink() {
 
 <template>
   <div>
-    <h1>参加記録用のリンク作成</h1>
+    <h1 class="text-h5 my-4">参加登録用リンクの作成</h1>
 
-    <div>
-      <label for="eventTitle">イベント名:</label>
-      <input id="eventTitle" v-model="eventTitle" type="text" placeholder="イベント名を入力" />
+    <v-form @submit.prevent="createLink">
+      <v-text-field
+        v-model="eventTitle"
+        label="イベント名"
+        placeholder="イベント名を入力"
+        required
+      />
+
+      <v-text-field
+        v-model="scheduledAt"
+        label="開催日"
+        type="date"
+        required
+      />
+
+      <v-btn type="submit" color="primary" class="mt-4">リンク作成</v-btn>
+    </v-form>
+
+    <div v-if="generatedUrl" class="mt-4">
+      <p class="text-subtitle-2 mb-1" style="color: #333;">{{ message }}</p>
+      <a :href="generatedUrl" target="_blank" class="text-decoration-underline">{{ generatedUrl }}</a>
     </div>
 
-    <div>
-      <label for="scheduledAt">開催日:</label>
-      <input id="scheduledAt" v-model="scheduledAt" type="datetime-local" />
-    </div>
-
-    <button @click="createLink">リンク作成</button>
-
-    <div v-if="generatedUrl" style="margin-top: 1em">
-      <p>{{ message }}</p>
-      <a :href="generatedUrl" target="_blank">{{ generatedUrl }}</a>
-    </div>
-
-    <p v-else-if="message" style="margin-top: 1em; color: #333;">{{ message }}</p>
+    <div v-else-if="message" class="mt-4" style="color: #333;">{{ message }}</div>
   </div>
 </template>

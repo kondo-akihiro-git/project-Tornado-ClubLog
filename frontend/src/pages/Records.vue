@@ -23,9 +23,9 @@ onMounted(async () => {
 
 // ヘッダー（クラブ名広め＋改行防止）
 const headers = [
-  { title: '同好会', key: 'club_name', width: '45%' },
+  { title: '同好会', key: 'club_name', width: '40%' },
   { title: '参加日', key: 'joined_at', width: '30%' },
-  { title: '承認状況', key: 'approved_status', width: '25%' }
+  { title: '承認状況', key: 'approved_status', width: '30%' }
 ]
 
 // 表示制御付きレコード
@@ -85,9 +85,11 @@ const onScroll = (e) => {
 
         <template #item.approved_status="{ item }">
           <v-chip
+          
             :color="statusColor(item.approved_status)"
             text-color="white"
-            small
+            size="small"
+            label
           >
             {{ statusLabel(item.approved_status) }}
           </v-chip>

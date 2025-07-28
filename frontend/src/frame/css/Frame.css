@@ -22,9 +22,15 @@
 
 /* 新たに追加 */
 .frame-content {
-  flex: 1;                        /* 残りのスペースを埋める */
-  overflow-y: auto;               /* 内容が多いときだけスクロール */
-  padding: 1rem;                  /* 任意：中身に余白 */
+  flex: 1;
+  overflow-y: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
   box-sizing: border-box;
+
+  /* 👇 スナップをここに持たせる */
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
 }
+
 

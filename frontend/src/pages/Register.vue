@@ -1,3 +1,4 @@
+<!-- ｆrontend/src/pages/Register.vue -->
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
@@ -27,7 +28,6 @@ async function register() {
     return
   }
 
-  // 先にユーザー名確認
   const verifyRes = await useVerifyUser(mailAddress.value)
   if (verifyRes.success && verifyRes.data.exists) {
     const username = verifyRes.data.username
@@ -53,24 +53,48 @@ async function register() {
 </script>
 
 <template>
-  <div>
-    <h1>イベント参加登録</h1>
+  <v-container class="py-8">
+    <v-row justify="center">
+      <v-col cols="12" sm="8" md="6">
+        <v-card>
+          <v-card-title class="text-h6">イベント参加登録</v-card-title>
 
-    <div v-if="event">
-      <p><strong>イベント名:</strong> {{ event.title }}</p>
-      <p v-if="event.scheduled_at"><strong>開催日時:</strong> {{ new Date(event.scheduled_at).toLocaleString() }}</p>
-    </div>
-    <div v-else>
-      <p>イベント情報を読み込み中...</p>
-    </div>
+          <v-card-text>
+            <div v-if="event">
+              <p><strong>イベント名:</strong> {{ event.title }}</p>
+              <p v-if="event.scheduled_at">
+                <strong>開催日時:</strong> {{ new Date(event.scheduled_at).toLocaleString() }}
+              </p>
+            </div>
+            <div v-else>
+              <p>イベント情報を読み込み中...</p>
+            </div>
 
-    <div>
-      <label>メールアドレス:</label>
-      <input v-model="mailAddress" type="email" placeholder="メールアドレスを入力" />
-    </div>
+            <v-text-field
+              v-model="mailAddress"
+              label="メールアドレス"
+              type="email"
+              placeholder="メールアドレスを入力"
+              required
+              class="mt-4"
+            />
 
-    <button @click="register" :disabled="!event">登録する</button>
+            <v-btn
+              @click="register"
+              :disabled="!event"
+              color="primary"
+              class="mt-2"
+              block
+            >
+              登録する
+            </v-btn>
 
-    <p style="margin-top: 1em; color: #333;">{{ message }}</p>
-  </div>
+            <p class="mt-4" :class="message.includes('完了') ? 'text-success' : 'text-error'">
+              {{ message }}
+            </p>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
