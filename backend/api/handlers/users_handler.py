@@ -7,11 +7,25 @@ class UsersHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
 
     async def get(self):
+        limit = int(self.get_argument("limit", 6))
+        offset = int(self.get_argument("offset", 0))
+
         try:
             conn = get_connection()
             cursor = conn.cursor()
 
-            # ✅ 承認されたユーザーだけを抽出するよう修正
+            # ★ 総件数取得
+            cursor.execute("""
+                SELECT COUNT(*)
+                FROM users u
+                JOIN participants p ON u.id = p.user_id
+                JOIN events e ON p.event_id = e.id
+                JOIN clubs c ON e.club_id = c.id
+                WHERE p.approved_status = 'approved'
+            """)
+            total_count = cursor.fetchone()[0] or 0
+
+            # ★ ページングしてデータ取得
             cursor.execute("""
                 SELECT
                     u.id,
@@ -25,8 +39,9 @@ class UsersHandler(tornado.web.RequestHandler):
                 JOIN clubs c ON e.club_id = c.id
                 WHERE
                     p.approved_status = 'approved'
-                ORDER BY u.id, p.joined_at;
-            """)
+                ORDER BY u.id, p.joined_at
+                LIMIT %s OFFSET %s;
+            """, (limit, offset))
 
             rows = cursor.fetchall()
             result = [
@@ -39,7 +54,11 @@ class UsersHandler(tornado.web.RequestHandler):
                 for row in rows
             ]
 
-            self.write({"user_participation": result})
+            # ★ total_countを追加して返す
+            self.write({
+                "user_participation": result,
+                "total_count": total_count
+            })
 
         except Exception as e:
             self.set_status(500)

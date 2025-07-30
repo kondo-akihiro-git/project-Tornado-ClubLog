@@ -1,13 +1,14 @@
-<!-- frontend/src/pages/Records.vue -->
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useGetRecords } from '../network/useGetRecords'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const rawRecords = ref([])
-const displayCount = ref(20)
-const loadMoreThreshold = 100
+const records = ref([])
+const limit = 20
+const offset = ref(0)
+const loading = ref(false)
+const allLoaded = ref(false)
 
 const user = JSON.parse(localStorage.getItem('user'))
 const userId = user?.user_id
@@ -16,22 +17,26 @@ if (!userId) {
   router.push('/login')
 }
 
-onMounted(async () => {
-  const res = await useGetRecords(userId)
-  rawRecords.value = res.records ?? []
-})
+const loadRecords = async () => {
+  if (loading.value || allLoaded.value) return
+  loading.value = true
+  const res = await useGetRecords(userId, limit, offset.value)
+  if (res.records.length < limit) {
+    allLoaded.value = true
+  }
+  records.value.push(...res.records)
+  offset.value += limit
+  loading.value = false
+}
 
-// ヘッダー（クラブ名広め＋改行防止）
+onMounted(loadRecords)
+
 const headers = [
   { title: '同好会', key: 'club_name', width: '40%' },
   { title: '参加日', key: 'joined_at', width: '30%' },
   { title: '承認状況', key: 'approved_status', width: '30%' }
 ]
 
-// 表示制御付きレコード
-const visibleRecords = computed(() => rawRecords.value.slice(0, displayCount.value))
-
-// ステータス表示
 const statusLabel = (status) => {
   switch (status) {
     case 'approved': return '承認済み'
@@ -49,18 +54,17 @@ const statusColor = (status) => {
   }
 }
 
-// スクロール検知で表示件数追加
 const onScroll = (e) => {
   const el = e.target
-  if (el.scrollHeight - el.scrollTop - el.clientHeight < loadMoreThreshold) {
-    displayCount.value += 20
+  if (el.scrollHeight - el.scrollTop - el.clientHeight < 100) {
+    loadRecords()
   }
 }
 </script>
 
 <template>
   <div>
-    <h1 class="text-h5 mb-4">参加記録</h1>
+    <h1 class="text-h5 my-4">参加記録</h1>
 
     <div
       style="max-height: 600px; overflow-y: auto;"
@@ -68,7 +72,7 @@ const onScroll = (e) => {
     >
       <v-data-table
         :headers="headers"
-        :items="visibleRecords"
+        :items="records"
         class="elevation-1"
         hide-default-footer
         density="compact"
@@ -85,7 +89,6 @@ const onScroll = (e) => {
 
         <template #item.approved_status="{ item }">
           <v-chip
-          
             :color="statusColor(item.approved_status)"
             text-color="white"
             size="small"
@@ -95,13 +98,9 @@ const onScroll = (e) => {
           </v-chip>
         </template>
       </v-data-table>
+
+      <div v-if="loading" class="text-center my-4">読み込み中...</div>
+      <div v-if="allLoaded" class="text-center my-4 text-grey">これ以上のデータはありません</div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-</style>
