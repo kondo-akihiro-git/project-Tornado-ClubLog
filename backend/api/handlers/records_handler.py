@@ -7,8 +7,6 @@ class RecordsHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
 
     async def get(self, user_id):
-        limit = int(self.get_argument("limit", 20))
-        offset = int(self.get_argument("offset", 0))
 
         try:
             conn = get_connection()
@@ -24,8 +22,7 @@ class RecordsHandler(tornado.web.RequestHandler):
                 JOIN clubs c ON e.club_id = c.id
                 WHERE p.user_id = %s
                 ORDER BY p.joined_at DESC
-                LIMIT %s OFFSET %s;
-            """, (user_id, limit, offset))
+            """, (user_id,))
 
             rows = cursor.fetchall()
             result = [
@@ -37,7 +34,10 @@ class RecordsHandler(tornado.web.RequestHandler):
                 for row in rows
             ]
 
-            self.write({"records": result})
+            self.write({
+                "records": result,
+                "total_count": len(result)
+            })
 
         except Exception as e:
             self.set_status(500)
